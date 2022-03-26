@@ -1,9 +1,7 @@
 import tensorflow as tf
 model = tf.keras.models.load_model('batt.h5')
 import streamlit as st
-import cv2
 from PIL import Image, ImageOps
-import numpy as np
 st.set_page_config(
      page_title="Used Battery Collector",
      page_icon="🧊",

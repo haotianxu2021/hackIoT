@@ -2,3 +2,4 @@ tensorflow==2.8.0
 streamlit==1.8.0
 numpy==1.21.5
 pillow==8.4.0
+mysql-connector-python==8.0.28

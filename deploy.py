@@ -30,6 +30,7 @@ if 'email' not in st.session_state:
 press = st.button('Submit')
 if press:
     st.session_state.email = True
+    myObj = {"action":"registration","email":email};
 if st.session_state.email:
     st.write('You sign in as', email)
     file = st.camera_input("Take a Picture")
@@ -38,6 +39,7 @@ if st.session_state.email:
     if file is None:
         st.text("Please upload an image file")
     else:
+        myObj = {"action":"photo","email":email};
         image = Image.open(file)
         st.image(image, use_column_width=True)
         res = import_and_predict(image, model)

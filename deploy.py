@@ -14,12 +14,14 @@ st.set_page_config(
          'About': "# There is nothing here."
      }
  )
+@st.experimental_memo
 def import_and_predict(img, model):
     img = tf.keras.preprocessing.image.img_to_array(img)
     img = tf.image.resize(img, [256, 256])
     img = tf.expand_dims(img, axis=0)
     prediction = model.predict(img)
     return prediction
+
 if 'account' not in st.session_state:
      st.session_state.account = dict()
 st.write("""
@@ -33,21 +35,27 @@ if 'email' not in st.session_state:
 press = st.button('Submit')
 if press:
     st.session_state.email = True
-    myObj = {"action":"registration","email":email};
+    # myObj = {"action":"registration","email":email};
 if st.session_state.email:
     st.write('You sign in as', email)
+    if st.button("Change your account"):
+         st.experimental_rerun()
     if email not in st.session_state.account.keys():
           st.session_state.account[email] = 0
+    
+    @st.experimental_memo
     file = st.camera_input("Take a Picture")
     #file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 
     if file is None:
         st.text("Please upload an image file")
     else:
-        myObj = {"action":"photo","email":email};
+        # myObj = {"action":"photo","email":email};
+        @st.experimental_memo
         image = Image.open(file)
         st.image(image, use_column_width=True)
         res = import_and_predict(image, model)
+          
         if res[0][0]>res[0][1] and res[0][0]>res[0][2]:
             st.write("It is a 9V Battery")
             st.session_state.account[email] += 3
@@ -61,5 +69,7 @@ if st.session_state.email:
             st.session_state.account[email] += 1
             st.write("You got 1 credit! Your current balance is", st.session_state.account[email])
     qquit = st.button("Quit")
-    if qquit:
+    if st.button("Quit"):
          st.experimental_rerun()
+    if st.button("Clear All"):
+         st.experimental_memo.clear()

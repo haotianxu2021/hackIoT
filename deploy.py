@@ -57,12 +57,12 @@ if st.session_state.email:
         if res[0][0]>res[0][1] and res[0][0]>res[0][2]:
             st.write("It is a 9V Battery")
             st.session_state.account[email] += 3
-            st.write("You got 3 credits! Your current balance is", st.session_state.account[email])
+            st.write("You got 3 MRC credits! Your current MRC balance is", st.session_state.account[email])
         elif res[0][1]>res[0][0] and res[0][1]>res[0][2]:
             st.write("It is AA Battery")
             st.session_state.account[email] += 2
-            st.write("You got 2 credits! Your current balance is", st.session_state.account[email])
+            st.write("You got 2 MRC credits! Your current MRC balance is", st.session_state.account[email])
         else:
             st.write("It is Button Battery")
             st.session_state.account[email] += 1
-            st.write("You got 1 credit! Your current balance is", st.session_state.account[email])
+            st.write("You got 1 MRC credit! Your current MRC balance is", st.session_state.account[email])

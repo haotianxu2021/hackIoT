@@ -1,11 +1,12 @@
 import tensorflow as tf
 model = tf.keras.models.load_model('batt.h5')
 import streamlit as st
+import mysql.connector
 from PIL import Image, ImageOps
 st.set_page_config(
      page_title="Used Battery Collector",
      page_icon="🧊",
-     layout="wide",
+     layout="center",
      initial_sidebar_state="expanded",
      menu_items={
          'Get Help': 'https://www.google.com',
@@ -19,6 +20,8 @@ def import_and_predict(img, model):
     img = tf.expand_dims(img, axis=0)
     prediction = model.predict(img)
     return prediction
+if 'account' not in st.session_state:
+     st.session_state.account = dict()
 st.write("""
          # Battery type Classification
          """

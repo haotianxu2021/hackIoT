@@ -38,8 +38,6 @@ if press:
     # myObj = {"action":"registration","email":email};
 if st.session_state.email:
     st.write('You sign in as', email)
-    if st.button("Change your account"):
-         st.experimental_rerun()
     if email not in st.session_state.account.keys():
           st.session_state.account[email] = 0
     
@@ -68,6 +66,3 @@ if st.session_state.email:
             st.write("It is Button Battery")
             st.session_state.account[email] += 1
             st.write("You got 1 credit! Your current balance is", st.session_state.account[email])
-    qquit = st.button("Quit")
-    if st.button("Quit"):
-         st.experimental_rerun()

@@ -60,6 +60,6 @@ if st.session_state.email:
             st.write("It is Button Battery")
             st.session_state.account[email] += 1
             st.write("You got 1 credit! Your current balance is", st.session_state.account[email])
-     qquit = st.button("Quit")
-     if qquit:
-          st.experimental_rerun()
+    qquit = st.button("Quit")
+    if qquit:
+         st.experimental_rerun()

@@ -14,7 +14,7 @@ st.set_page_config(
          'About': "# There is nothing here."
      }
  )
-@st.experimental_memo
+
 def import_and_predict(img, model):
     img = tf.keras.preprocessing.image.img_to_array(img)
     img = tf.image.resize(img, [256, 256])
@@ -43,7 +43,7 @@ if st.session_state.email:
     if email not in st.session_state.account.keys():
           st.session_state.account[email] = 0
     
-    @st.experimental_memo
+    
     file = st.camera_input("Take a Picture")
     #file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 
@@ -51,7 +51,7 @@ if st.session_state.email:
         st.text("Please upload an image file")
     else:
         # myObj = {"action":"photo","email":email};
-        @st.experimental_memo
+        
         image = Image.open(file)
         st.image(image, use_column_width=True)
         res = import_and_predict(image, model)
@@ -71,5 +71,3 @@ if st.session_state.email:
     qquit = st.button("Quit")
     if st.button("Quit"):
          st.experimental_rerun()
-    if st.button("Clear All"):
-         st.experimental_memo.clear()

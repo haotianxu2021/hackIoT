@@ -6,7 +6,7 @@ from PIL import Image, ImageOps
 st.set_page_config(
      page_title="Used Battery Collector",
      page_icon="🧊",
-     layout="center",
+     layout="wide",
      initial_sidebar_state="expanded",
      menu_items={
          'Get Help': 'https://www.google.com',

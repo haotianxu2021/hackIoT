@@ -36,6 +36,8 @@ if press:
     myObj = {"action":"registration","email":email};
 if st.session_state.email:
     st.write('You sign in as', email)
+    if email not in st.session_state.account.keys():
+          st.session_state.account[email] = 0
     file = st.camera_input("Take a Picture")
     #file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 
@@ -47,8 +49,15 @@ if st.session_state.email:
         st.image(image, use_column_width=True)
         res = import_and_predict(image, model)
         if res[0][0]>res[0][1] and res[0][0]>res[0][2]:
-            st.write("9V Battery")
+            st.write("It is a 9V Battery")
+            st.session_state.account[email] += 3
+            st.write("You got 3 credits! Your current balance is", st.session_state.account[email])
         elif res[0][1]>res[0][0] and res[0][1]>res[0][2]:
-            st.write("AA Battery")
+            st.write("It is AA Battery")
+            st.session_state.account[email] += 2
+            st.write("You got 2 credits! Your current balance is", st.session_state.account[email])
         else:
-            st.write("Button Battery")
+            st.write("It is Button Battery")
+            st.session_state.account[email] += 1
+            st.write("You got 1 credit! Your current balance is", st.session_state.account[email])
+        qquit = st.button("Quit", on_click=st.experimental_rerun())
